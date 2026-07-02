@@ -1,10 +1,15 @@
 <div class="site-header-inner">
   <a class="site-brand" href="{{ "/" | relURL }}" aria-label="{{ site.Title }}">
-    <img src="/brand/tableaux-theory-logo.png" alt="" class="site-logo">
     <span class="site-brand-text">
-      <span class="site-brand-name">{{ site.Title }}</span>
-      <span class="site-brand-subtitle">Modern Visual Novels</span>
+      <span class="site-brand-name">Daniel Clute</span>
+      <span class="site-brand-subtitle">Software &amp; Design</span>
     </span>
   </a>
-  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  <nav class="site-nav" aria-label="Main navigation">
+    <ul class="site-menu">
+      <li class="site-menu-item"><a class="menu-link" href="/#about">About Me</a></li>
+      <li class="site-menu-item"><a class="menu-link" href="/#services">Services</a></li>
+      <li class="site-menu-item"><a class="menu-link" href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
 </div>

@@ -1,105 +1,70 @@
 {{ define "main" }}
-  {{ $newsSection := site.GetPage "/home" }}
-  {{ $newsPages := slice }}
-  {{ with $newsSection }}
-    {{ $newsPages = .RegularPages.ByDate.Reverse }}
-  {{ end }}
-  <div class="w-full">
-    <section class="home-hero" aria-labelledby="home-title">
-      <div class="hero-panel">
-        <div class="hero-kicker">Modern Visual Novels</div>
-        <div class="hero-content">
-          <h1 id="home-title" class="hero-title">{{ site.Title }}</h1>
-          <p class="hero-tagline">"Make Video Games Literature"</p>
-          <p class="hero-copy">Independent releases, essays, research, and community notes around modern visual novels.</p>
-        </div>
+  <section class="hero hero-single" aria-labelledby="home-title">
+    <div class="hero-copy-block">
+      <p class="eyebrow">Independent software developer and designer</p>
+      <h1 id="home-title">Daniel Clute Software &amp; Design</h1>
+      <p class="hero-lede">I build sharp, usable websites and digital products for teams that need both engineering judgment and design taste in one place.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#contact">Start a project</a>
+        <a class="button button-secondary" href="#services">View services</a>
       </div>
-      <div class="hero-visual" aria-label="Featured releases">
-        <a class="hero-product" href="{{ "/mvns/sd/" | relURL }}">
-          <img src="/home/mvn_sd_capsule_small_upres.png" alt="">
-          <span>Featured release</span>
-        </a>
-        <a class="hero-product" href="{{ "/mvns/sn/" | relURL }}">
-          <img src="/home/mvn_sn_capsule_header.png" alt="">
-          <span>Modern visual novel</span>
-        </a>
-      </div>
-    </section>
-      {{ with $newsPages }}
-        <div class="not-prose home-news w-full">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">Latest</div>
-              <h2>News and Notes...</h2>
-            </div>
-          </div>
-          <div class="news-list">
-            {{ range . }}
-              {{ $item := .Params }}
-              {{ if eq $item.type "article" }}
-                {{ $resolvedTitle := default (default .Title $item.title) $item.displayTitle }}
-                {{ if and (or (not $resolvedTitle) (eq (trim $resolvedTitle " ") "")) $item.linkUrl }}
-                  {{ with try (resources.GetRemote $item.linkUrl) }}
-                    {{ with .Value }}
-                      {{ $pageHTML := .Content | string }}
-                      {{ $h1Match := findRESubmatch `(?is)<h1[^>]*>\s*(.*?)\s*</h1>` $pageHTML 1 }}
-                      {{ if gt (len $h1Match) 0 }}
-                        {{ $h1Raw := index (index $h1Match 0) 1 }}
-                        {{ $h1Text := replaceRE `(?is)<[^>]+>` "" $h1Raw }}
-                        {{ $resolvedTitle = htmlUnescape (replaceRE `\s+` " " $h1Text | strings.TrimSpace) }}
-                      {{ else }}
-                        {{ $ogMatch := findRESubmatch `(?is)<meta[^>]+property=["']og:title["'][^>]+content=["'](.*?)["']` $pageHTML 1 }}
-                        {{ if eq (len $ogMatch) 0 }}
-                          {{ $ogMatch = findRESubmatch `(?is)<meta[^>]+content=["'](.*?)["'][^>]+property=["']og:title["']` $pageHTML 1 }}
-                        {{ end }}
-                        {{ if gt (len $ogMatch) 0 }}
-                          {{ $resolvedTitle = htmlUnescape (replaceRE `\s+` " " (index (index $ogMatch 0) 1) | strings.TrimSpace) }}
-                        {{ else }}
-                          {{ $titleMatch := findRESubmatch `(?is)<title[^>]*>\s*(.*?)\s*</title>` $pageHTML 1 }}
-                          {{ if gt (len $titleMatch) 0 }}
-                            {{ $resolvedTitle = htmlUnescape (replaceRE `\s+` " " (index (index $titleMatch 0) 1) | strings.TrimSpace) }}
-                          {{ end }}
-                        {{ end }}
-                      {{ end }}
-                    {{ end }}
-                  {{ end }}
-                {{ end }}
-                <a class="news-item news-item-link" href="{{ $item.linkUrl }}" target="_blank" rel="noopener noreferrer">
-                  <div class="news-date">{{ .Date.Format "2006-01-02" }}</div>
-                  {{ with $item.thumbnailUrl }}
-                    <div class="news-thumb-wrap">
-                      <img class="news-thumb{{ if in . "logo" }} is-logo{{ end }}" src="{{ . }}" alt="{{ default "News thumbnail" $resolvedTitle }}" loading="lazy">
-                    </div>
-                  {{ end }}
-                  {{ $isJapaneseTitle := gt (len (findRE `[\p{Hiragana}\p{Katakana}\p{Han}]` $resolvedTitle)) 0 }}
-                  <div class="news-title"{{ if $isJapaneseTitle }} lang="ja"{{ end }}>{{ $resolvedTitle }}</div>
-                  {{ if or $item.sourceSite $item.writer }}
-                    <p class="news-text">
-                      {{ with $item.sourceSite }}Source: {{ . }}{{ end }}
-                      {{ if and $item.sourceSite $item.writer }} · {{ end }}
-                      {{ with $item.writer }}Writer: {{ . }}{{ end }}
-                    </p>
-                  {{ else }}
-                    {{ with $item.text }}<div class="news-text">{{ . | markdownify }}</div>{{ end }}
-                  {{ end }}
-                </a>
-              {{ else }}
-                <article class="news-item">
-                  <div class="news-date">{{ .Date.Format "2006-01-02" }}</div>
-                  {{ with $item.thumbnailUrl }}
-                    <div class="news-thumb-wrap">
-                      <img class="news-thumb{{ if in . "logo" }} is-logo{{ end }}" src="{{ . }}" alt="{{ default "News thumbnail" $item.title }}" loading="lazy">
-                    </div>
-                  {{ end }}
-                  {{ $newsTitle := default .Title $item.title }}
-                  {{ $isJapaneseTitle := gt (len (findRE `[\p{Hiragana}\p{Katakana}\p{Han}]` $newsTitle)) 0 }}
-                  <div class="news-title"{{ if $isJapaneseTitle }} lang="ja"{{ end }}>{{ $newsTitle }}</div>
-                  {{ with $item.text }}<div class="news-text">{{ . | markdownify }}</div>{{ end }}
-                </article>
-              {{ end }}
-            {{ end }}
-          </div>
-        </div>
-      {{ end }}
-  </div>
+    </div>
+  </section>
+
+  <section id="about" class="section two-column" aria-labelledby="about-title">
+    <div>
+      <p class="section-label">About Me</p>
+      <h2 id="about-title">Practical design, production-ready code.</h2>
+    </div>
+    <div class="section-body">
+      <p>I help clients turn rough ideas, stale websites, and underpowered interfaces into clear, maintainable products. The work sits at the intersection of frontend engineering, visual systems, content structure, and product thinking.</p>
+      <p>The process is direct: understand the business, map the user path, design the interface, build it cleanly, and leave you with something you can actually operate after launch.</p>
+    </div>
+  </section>
+
+  <section id="services" class="section" aria-labelledby="services-title">
+    <div class="section-heading">
+      <p class="section-label">Services</p>
+      <h2 id="services-title">Focused freelance support.</h2>
+    </div>
+    <div class="service-grid">
+      <article class="service-card">
+        <span class="service-number">01</span>
+        <h3>Websites</h3>
+        <p>Portfolio sites, service businesses, landing pages, content sites, and redesigns built for speed, clarity, and conversion.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-number">02</span>
+        <h3>Product UI</h3>
+        <p>Interfaces, dashboards, prototypes, component systems, and product flows for tools that people need to use repeatedly.</p>
+      </article>
+      <article class="service-card">
+        <span class="service-number">03</span>
+        <h3>Design Systems</h3>
+        <p>Visual direction, responsive layouts, reusable components, and documentation that keep a product coherent as it grows.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section process-band" aria-labelledby="process-title">
+    <p class="section-label">Workflow</p>
+    <h2 id="process-title">A lean path from first call to launch.</h2>
+    <div class="process-steps">
+      <div><span>Scope</span><p>Define the goal, audience, constraints, and success criteria.</p></div>
+      <div><span>Shape</span><p>Establish structure, visual direction, and the core user paths.</p></div>
+      <div><span>Build</span><p>Implement responsive, accessible pages and production-ready components.</p></div>
+      <div><span>Ship</span><p>Test, polish, deploy, and hand over clear next steps.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section" aria-labelledby="contact-title">
+    <div>
+      <p class="section-label">Contact</p>
+      <h2 id="contact-title">Need a site, product interface, or design partner?</h2>
+    </div>
+    <div class="contact-card">
+      <p>Send a short note about what you are building, what already exists, and what kind of timeline you have in mind.</p>
+      <a class="button button-primary" href="mailto:danielclute@gmail.com">danielclute@gmail.com</a>
+    </div>
+  </section>
 {{ end }}
