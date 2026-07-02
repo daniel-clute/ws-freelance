@@ -4,13 +4,13 @@
   --surface: rgba(28, 29, 29, 0.9);
   --surface-solid: #1c1d1d;
   --surface-muted: #151616;
-  --ink: #f4f1e8;
-  --text: #f4f1e8;
-  --text-muted: rgba(244, 241, 232, 0.68);
-  --text-subtle: rgba(244, 241, 232, 0.43);
-  --border: rgba(244, 241, 232, 0.16);
-  --border-strong: rgba(244, 241, 232, 0.38);
-  --accent: #d7d0c0;
+  --ink: #f2f2f2;
+  --text: #f2f2f2;
+  --text-muted: rgba(242, 242, 242, 0.68);
+  --text-subtle: rgba(242, 242, 242, 0.43);
+  --border: rgba(242, 242, 242, 0.16);
+  --border-strong: rgba(242, 242, 242, 0.38);
+  --accent: #d8d8d8;
   --accent-soft: #2a2b2b;
   --shadow: 0 32px 100px rgba(0, 0, 0, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.035);
   --radius: 3px;
@@ -33,7 +33,7 @@ body {
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
     linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    radial-gradient(circle at 14% 0%, rgba(215, 208, 192, 0.12), transparent 26rem),
+    radial-gradient(circle at 14% 0%, rgba(216, 216, 216, 0.11), transparent 26rem),
     linear-gradient(180deg, #181919 0%, var(--page-bg) 28rem, #090a0a 100%);
   background-size: 44px 44px, 44px 44px, auto, auto;
   font-family: var(--font-body);
@@ -111,7 +111,7 @@ p {
   right: 0;
   bottom: 3px;
   height: 1px;
-  background: rgba(244, 241, 232, 0.08);
+  background: rgba(242, 242, 242, 0.08);
   pointer-events: none;
 }
 
