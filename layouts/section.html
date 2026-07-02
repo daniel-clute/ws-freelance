@@ -1,0 +1,98 @@
+{{ define "main" }}
+<div class="w-full tab-feed">
+  {{ $hasTitle := ne .Title "" }}
+  {{ with .Title }}<h1 class="page-title">{{ . }}</h1>{{ end }}
+
+  {{ $posts := .RegularPages }}
+  {{ if hugo.IsProduction }}{{ $posts = where $posts "Draft" false }}{{ end }}
+  {{ $posts = sort $posts "Date" "desc" }}
+
+  {{/* Get external links from front matter */}}
+  {{ $externalLinks := .Params.externalLinks }}
+
+  {{ $allItems := slice }}
+  
+  {{/* Add posts to items */}}
+  {{ range $posts }}
+    {{ $allItems = $allItems | append (dict "type" "post" "data" . "date" .Date "sortDate" .Date) }}
+  {{ end }}
+  
+  {{/* Add external links to items with proper date parsing */}}
+  {{ if $externalLinks }}
+    {{ range $externalLinks }}
+      {{/* Parse the date and format it properly */}}
+      {{ $parsedDate := time .date }}
+      {{ $displayDate := $parsedDate.Format "January 2, 2006" }}
+      {{ $allItems = $allItems | append (dict "type" "link" "data" . "date" $displayDate "sortDate" $parsedDate) }}
+    {{ end }}
+  {{ end }}
+
+  {{/* Sort all items by sortDate (newest first) */}}
+  {{ $allItems = sort $allItems "sortDate" "desc" }}
+
+  {{ if $allItems }}
+    <div class="surface-list {{ if $hasTitle }}mt-6{{ else }}mt-2{{ end }}">
+      {{ range $allItems }}
+        {{ if eq .type "post" }}
+          {{ $post := .data }}
+          {{/* determine icon from params (listIcon preferred), allow keyword or explicit path */}}
+          {{ $icon := "" }}
+          {{ with $post.Params.listIcon }}
+            {{ $val := . }}
+            {{ if or (eq $val "contribute") (eq $val "writing") }}
+              {{ if eq $val "contribute" }}{{ $icon = "/contribute.png" }}{{ end }}
+              {{ if eq $val "writing" }}{{ $icon = "/writing.png" }}{{ end }}
+            {{ else }}
+              {{ $icon = $val }}
+            {{ end }}
+          {{ else }}
+            {{ with $post.Params.icon }}
+              {{ $val := . }}
+              {{ if or (eq $val "contribute") (eq $val "writing") }}
+                {{ if eq $val "contribute" }}{{ $icon = "/contribute.png" }}{{ end }}
+                {{ if eq $val "writing" }}{{ $icon = "/writing.png" }}{{ end }}
+              {{ else }}
+                {{ $icon = $val }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ if eq $icon "" }}
+            {{ if in $post.Params.tags "write" }}{{ $icon = "/writing.png" }}{{ end }}
+            {{ if or (in $post.Params.tags "blog") (in $post.Params.tags "log") }}{{ $icon = "/writing.png" }}{{ end }}
+          {{ end }}
+
+          {{/* teaser text preference */}}
+          {{ $teaser := $post.Params.teaser }}
+          {{ if not $teaser }}{{ $teaser = $post.Params.description }}{{ end }}
+          {{ if not $teaser }}{{ $teaser = $post.Summary }}{{ end }}
+
+          <a href="{{ $post.RelPermalink }}" class="surface-card surface-link-card">
+            <h2 class="surface-title">
+              <span class="surface-title-row">
+                {{ with $icon }}<img src="{{ . }}" alt="" class="pixelated pixel-icon">{{ end }}
+                {{ $post.LinkTitle }}
+              </span>
+            </h2>
+            <time class="surface-meta">{{ $post.Date.Format "January 2, 2006" }}</time>
+            {{ with $teaser }}<p class="surface-text">{{ . | plainify | truncate 140 }}</p>{{ end }}
+          </a>
+        {{ else if eq .type "link" }}
+          {{ $link := .data }}
+          <a href="{{ $link.url }}" target="_blank" rel="noopener noreferrer" class="surface-card surface-link-card">
+            <h2 class="surface-title">
+              <span class="surface-title-row">
+                <img src="{{ $link.icon }}" alt="" class="pixelated pixel-icon">
+                {{ $link.title }}
+              </span>
+            </h2>
+            <time class="surface-meta">{{ .date }}</time>
+            {{ with $link.teaser }}<p class="surface-text">{{ . | plainify | truncate 140 }}</p>{{ end }}
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="section-empty mt-8">No posts or links found.</p>
+  {{ end }}
+</div>
+{{ end }}

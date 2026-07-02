@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}Make Video Games Literature | {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+{{ $stylesPath := "static/css/styles.css" }}
+{{ $stylesHref := "/css/styles.css" }}
+{{ if fileExists $stylesPath }}
+<link href="{{ $stylesHref }}?v={{ md5 (readFile $stylesPath) }}" rel="stylesheet">
+{{ else }}
+<link href="{{ $stylesHref }}" rel="stylesheet">
+{{ end }}
+
+{{ $customPath := "static/css/custom.css" }}
+{{ $customHref := "/css/custom.css" }}
+{{ if fileExists $customPath }}
+<link href="{{ $customHref }}?v={{ md5 (readFile $customPath) }}" rel="stylesheet">
+{{ else }}
+<link href="{{ $customHref }}" rel="stylesheet">
+{{ end }}

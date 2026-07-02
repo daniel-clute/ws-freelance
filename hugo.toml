@@ -1,0 +1,31 @@
+baseURL = 'https://tableauxtheory.com/'
+languageCode = 'en-us'
+title = 'TABLEAUX THEORY'
+disableKinds = ['taxonomy', 'term']
+ignoreFiles = ['^open-source/', '^me\\.md$', '^write/']
+
+[menus]
+  [[menus.main]]
+    name = 'home'
+    pageRef = '/'
+    weight = 1
+
+  [[menus.main]]
+    name = 'mvns'
+    pageRef = '/mvns'
+    weight = 2
+
+  [[menus.main]]
+    name = 'phil'
+    pageRef = '/phil'
+    weight = 3
+
+  [[menus.main]]
+    name = 'blog'
+    pageRef = '/blog'
+    weight = 4
+
+  [[menus.main]]
+    name = 'shop'
+    pageRef = '/shop'
+    weight = 5

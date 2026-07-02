@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <div class="background-texture" aria-hidden="true">
+    {{ $textureLines := slice
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      "Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores."
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet consectetur adipisci velit."
+      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum."
+      "Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat."
+      "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates."
+    }}
+    {{ range seq 0 39 }}
+      {{ $line := index $textureLines (mod . (len $textureLines)) }}
+      <span>{{ delimit (slice $line $line $line $line $line $line) " " }}</span>
+    {{ end }}
+  </div>
+  <script>
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var ticking = false;
+      function updateTextureParallax() {
+        document.documentElement.style.setProperty("--texture-parallax", (window.scrollY * -0.035).toFixed(2) + "px");
+        ticking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateTextureParallax);
+      }, { passive: true });
+      updateTextureParallax();
+    })();
+  </script>
+  {{ $minimal := eq .Type "shop" }}
+  <header class="site-header">
+    {{ partial "header.html" . }}
+  </header>
+  <main>
+    {{ if $minimal }}
+      <div class="site-shell-wide">
+      {{ block "main" . }}{{ end }}
+      </div>
+    {{ else }}
+      <div class="site-shell">
+      {{ block "main" . }}{{ end }}
+      </div>
+    {{ end }}
+  </main>
+  {{ if not $minimal }}
+    <footer class="site-footer">
+      {{ $home := site.GetPage "/" }}
+      <div class="footer-link-panel">
+        <div class="footer-link-label">Elsewhere</div>
+        <div class="footer-links">
+          {{ with $home.Params.links }}
+            {{ range . }}
+              {{ if and .url (ne .url "") }}
+                <a class="store-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ default "Link" .name }}</a>
+              {{ end }}
+            {{ end }}
+          {{ else }}
+            {{ with $home.Params.discordUrl }}{{ if ne . "" }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Discord</a>{{ end }}{{ end }}
+            {{ with $home.Params.redditUrl }}{{ if ne . "" }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">r/modernvisualnovels</a>{{ end }}{{ end }}
+            {{ with $home.Params.youtubeUrl }}{{ if ne . "" }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">YouTube</a>{{ end }}{{ end }}
+          {{ end }}
+        </div>
+      </div>
+      <p id="site-footer-message">You look nice today.</p>
+      <script>
+        (function () {
+          var phrases = [
+            "you look nice today.",
+            "have a nice day.",
+            "you're pretty cool.",
+            "thanks for stopping by.",
+            "good day!",
+            "cheers!",
+          ];
+          var el = document.getElementById("site-footer-message");
+          if (!el) return;
+          el.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+        })();
+      </script>
+    </footer>
+  {{ end }}
+</body>
+</html>

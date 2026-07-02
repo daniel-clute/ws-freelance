@@ -1,0 +1,63 @@
+{{ define "main" }}
+  <div class="w-full mvns-index">
+    {{ $hasTitle := ne .Title "" }}
+    {{ with .Title }}<h1 class="page-title">{{ . }}</h1>{{ end }}
+    {{ with .Content }}{{ . }}{{ end }}
+
+    {{ $works := .RegularPages }}
+    {{ if hugo.IsProduction }}{{ $works = where $works "Draft" false }}{{ end }}
+    {{ if $works }}
+      <div class="{{ if $hasTitle }}mt-6{{ else }}mt-2{{ end }} surface-list mvns-list">
+        {{ range $works }}
+          {{ $img := .Params.image }}
+          <article class="surface-card mvns-card">
+            {{ with $img }}
+              {{- $src := . -}}
+              {{- $srcBase := index (split (index (split $src "?") 0) "#") 0 -}}
+              {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $srcBase) -}}
+              {{- if fileExists $staticPath -}}
+                {{- $src = printf "%s?v=%s" $srcBase (md5 (readFile $staticPath)) -}}
+              {{- end -}}
+              <img src="{{ $src }}" alt="" class="pixelated pixel-frame w-full h-auto mvns-image">
+            {{ end }}
+
+            <div class="mvns-card-body">
+              <div class="mvns-card-copy">
+                <h2 class="surface-title">{{ .LinkTitle }}</h2>
+                {{ with .Summary }}<p class="surface-text">{{ . | plainify | truncate 220 }}</p>{{ end }}
+              </div>
+
+              {{ with .Params.store }}
+                <div class="surface-store-links">
+                  {{ if or .steam .jast .gog .itch .kickstarter }}
+                    <div class="surface-store-row">
+                      {{ with .steam }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Steam</a>{{ end }}
+                      {{ with .jast }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">JAST USA</a>{{ end }}
+                      {{ with .gog }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">GOG</a>{{ end }}
+                      {{ with .itch }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">itch.io</a>{{ end }}
+                      {{ with .kickstarter }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Kickstarter</a>{{ end }}
+                    </div>
+                  {{ end }}
+                  {{ if or .steam_demo .jast_demo .itch_demo }}
+                    <div class="surface-store-row">
+                      {{ with .steam_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Steam Demo</a>{{ end }}
+                      {{ with .jast_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">JAST USA Demo</a>{{ end }}
+                      {{ with .itch_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">itch.io Demo</a>{{ end }}
+                    </div>
+                  {{ end }}
+                  {{ if .amazon_play }}
+                    <div class="surface-store-row">
+                      <a class="store-link" href="{{ .amazon_play }}" target="_blank" rel="noopener noreferrer">Play Adaptation</a>
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="section-empty mt-8">No works yet.</p>
+    {{ end }}
+  </div>
+{{ end }}

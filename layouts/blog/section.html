@@ -1,0 +1,61 @@
+{{ define "main" }}
+<div class="w-full tab-feed mvns-feed">
+  {{/* Intentionally omit the section H1 for a more minimal blog index */}}
+  {{ with .Content }}{{ . }}{{ end }}
+
+  {{ $posts := .RegularPages }}
+  {{ if hugo.IsProduction }}{{ $posts = where $posts "Draft" false }}{{ end }}
+  {{ $posts = sort $posts "Date" "desc" }}
+  {{ $externalLinks := .Params.externalLinks }}
+
+  {{ $allItems := slice }}
+  {{ range $posts }}
+    {{ $allItems = $allItems | append (dict "type" "post" "data" . "date" .Date "sortDate" .Date) }}
+  {{ end }}
+  {{ if $externalLinks }}
+    {{ range $externalLinks }}
+      {{ $parsedDate := time .date }}
+      {{ $displayDate := $parsedDate.Format "January 2, 2006" }}
+      {{ $allItems = $allItems | append (dict "type" "link" "data" . "date" $displayDate "sortDate" $parsedDate) }}
+    {{ end }}
+  {{ end }}
+
+  {{ $allItems = sort $allItems "sortDate" "desc" }}
+
+  {{ if $allItems }}
+    <div class="surface-list mt-2">
+      {{ range $allItems }}
+        {{ if eq .type "post" }}
+          {{ $post := .data }}
+          {{ $teaser := $post.Params.teaser }}
+          {{ if not $teaser }}{{ $teaser = $post.Params.description }}{{ end }}
+          {{ if not $teaser }}{{ $teaser = $post.Summary }}{{ end }}
+
+          <a href="{{ $post.RelPermalink }}" class="blog-entry surface-card surface-link-card">
+            <h2 class="blog-title">{{ $post.LinkTitle }}</h2>
+            {{ with $teaser }}
+              <p class="blog-teaser">
+                {{ . | plainify | truncate 180 }}
+              </p>
+            {{ end }}
+            <time class="blog-date">{{ $post.Date.Format "January 2, 2006" }}</time>
+          </a>
+        {{ else if eq .type "link" }}
+          {{ $link := .data }}
+          <a href="{{ $link.url }}" target="_blank" rel="noopener noreferrer" class="blog-entry surface-card surface-link-card">
+            <h2 class="blog-title">{{ $link.title }}</h2>
+            {{ with $link.teaser }}
+              <p class="blog-teaser">
+                {{ . | plainify | truncate 180 }}
+              </p>
+            {{ end }}
+            <time class="blog-date">{{ .date }}</time>
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="section-empty mt-8">No posts or links found.</p>
+  {{ end }}
+</div>
+{{ end }}

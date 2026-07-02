@@ -1,0 +1,45 @@
+{{ define "main" }}
+  <div class="flex flex-col gap-6 tab-feed mvns-feed">
+    <div class="flex-1 surface-card">
+      <h1 class="page-title">{{ .Title }}</h1>
+
+      {{ with .Params.image }}
+        {{- $src := . -}}
+        {{- $srcBase := index (split (index (split $src "?") 0) "#") 0 -}}
+        {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $srcBase) -}}
+        {{- if fileExists $staticPath -}}
+          {{- $src = printf "%s?v=%s" $srcBase (md5 (readFile $staticPath)) -}}
+        {{- end -}}
+        <img src="{{ $src }}" alt="" class="pixelated pixel-frame w-full h-auto mb-4">
+      {{ end }}
+
+      {{ with .Params.store }}
+        <div class="not-prose surface-store-links mb-4">
+          {{ if or .steam .jast .gog .itch .kickstarter }}
+            <div class="surface-store-row">
+              {{ with .steam }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Steam</a>{{ end }}
+              {{ with .jast }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">JAST USA</a>{{ end }}
+              {{ with .gog }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">GOG</a>{{ end }}
+              {{ with .itch }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">itch.io</a>{{ end }}
+              {{ with .kickstarter }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Kickstarter</a>{{ end }}
+            </div>
+          {{ end }}
+          {{ if or .steam_demo .jast_demo .itch_demo }}
+            <div class="surface-store-row">
+              {{ with .steam_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">Steam Demo</a>{{ end }}
+              {{ with .jast_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">JAST USA Demo</a>{{ end }}
+              {{ with .itch_demo }}<a class="store-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">itch.io Demo</a>{{ end }}
+            </div>
+          {{ end }}
+          {{ if .amazon_play }}
+            <div class="surface-store-row">
+              <a class="store-link" href="{{ .amazon_play }}" target="_blank" rel="noopener noreferrer">Play Adaptation</a>
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      <div class="page-content">{{ .Content }}</div>
+    </div>
+  </div>
+{{ end }}

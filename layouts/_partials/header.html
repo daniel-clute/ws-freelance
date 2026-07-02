@@ -1,0 +1,10 @@
+<div class="site-header-inner">
+  <a class="site-brand" href="{{ "/" | relURL }}" aria-label="{{ site.Title }}">
+    <img src="/brand/tableaux-theory-logo.png" alt="" class="site-logo">
+    <span class="site-brand-text">
+      <span class="site-brand-name">{{ site.Title }}</span>
+      <span class="site-brand-subtitle">Modern Visual Novels</span>
+    </span>
+  </a>
+  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+</div>

@@ -1,0 +1,41 @@
++++
+portraitImage = "/portrait.png"
+
+introTitle = "Introduce yourself here!"
+introBody = "Give the audience a little summary/introduction about what to expect in this ASCII, black and white, pixel focused theme."
+
+statusImage = "/status.png"
+statusText = "A way to let everyone know what you're up to..."
+
+watchingImage = "/watching.png"
+watchingText = "How to create a Hugo theme from scratch — Berkay Çubuk // HugoConf 2023"
+watchingUrl = "https://www.youtube.com/watch?v=0WJ2lWNhqm8"
+
+[[links]]
+name = "Discord"
+url = "https://discord.gg/7tYCpnasP3"
+
+[[links]]
+name = "r/modernvisualnovels"
+url = "https://www.reddit.com/r/modernvisualnovels/"
+
+[[links]]
+name = "YouTube"
+url = "https://www.youtube.com/@TABLEAUX_THEORY"
+
+[[links]]
+name = "Instagram"
+url = "https://www.instagram.com/tableauxtheory/"
+
+[[links]]
+name = "X"
+url = "https://x.com/TABLEAUX_THEORY"
+
+[[links]]
+name = "Medium"
+url = "https://medium.com/@DanielClute"
+
+discordUrl = "https://discord.gg/7tYCpnasP3"
+redditUrl = "https://www.reddit.com/r/modernvisualnovels/"
+youtubeUrl = "https://www.youtube.com/@TABLEAUX_THEORY"
++++
