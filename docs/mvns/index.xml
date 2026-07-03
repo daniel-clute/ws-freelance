@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Daniel Clute Software &amp; Design</title>
-    <link>https://tableauxtheory.com/mvns/</link>
+    <link>http://localhost:44705/mvns/</link>
     <description>Recent content on Daniel Clute Software &amp; Design</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="https://tableauxtheory.com/mvns/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:44705/mvns/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Oh man, a Train.</title>
-      <link>https://tableauxtheory.com/mvns/sn/</link>
+      <link>http://localhost:44705/mvns/sn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/mvns/sn/</guid>
+      <guid>http://localhost:44705/mvns/sn/</guid>
       <description>&lt;p&gt;Kind of like if &amp;ldquo;Luigi&amp;rsquo;s Mansion&amp;rdquo; and René Magritte had a baby and it was a visual novel. Am I allowed to say that? Though, only is it like this in a sort of philosophical way.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Everything I Know, and Everything I&#39;m Ever Gonna Know</title>
-      <link>https://tableauxtheory.com/mvns/sd/</link>
+      <link>http://localhost:44705/mvns/sd/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/mvns/sd/</guid>
+      <guid>http://localhost:44705/mvns/sd/</guid>
       <description>&lt;p&gt;A small modern visual novel about the hardships of young adulthood, failed relationships, and baseball(?!?) in the modern world.&lt;/p&gt;</description>
     </item>
   </channel>

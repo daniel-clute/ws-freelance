@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on Daniel Clute Software &amp; Design</title>
-    <link>https://tableauxtheory.com/home/</link>
+    <link>http://localhost:44705/home/</link>
     <description>Recent content in Homes on Daniel Clute Software &amp; Design</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 18 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://tableauxtheory.com/home/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:44705/home/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Modern Visual Novel #2 Officially Announced.</title>
-      <link>https://tableauxtheory.com/home/2026-03-18-sn-announcement/</link>
+      <link>http://localhost:44705/home/2026-03-18-sn-announcement/</link>
       <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/home/2026-03-18-sn-announcement/</guid>
+      <guid>http://localhost:44705/home/2026-03-18-sn-announcement/</guid>
       <description></description>
     </item>
     <item>
       <title>Everything I Know, and Everything I&#39;m Ever Gonna Know Is Out Now!</title>
-      <link>https://tableauxtheory.com/home/2026-03-03-sd-release-announcement/</link>
+      <link>http://localhost:44705/home/2026-03-03-sd-release-announcement/</link>
       <pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/home/2026-03-03-sd-release-announcement/</guid>
+      <guid>http://localhost:44705/home/2026-03-03-sd-release-announcement/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>https://tableauxtheory.com/home/2026-03-02-jastusa-demo-announcement/</link>
+      <link>http://localhost:44705/home/2026-03-02-jastusa-demo-announcement/</link>
       <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/home/2026-03-02-jastusa-demo-announcement/</guid>
+      <guid>http://localhost:44705/home/2026-03-02-jastusa-demo-announcement/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>https://tableauxtheory.com/home/2026-02-18-4gamer-coverage/</link>
+      <link>http://localhost:44705/home/2026-02-18-4gamer-coverage/</link>
       <pubDate>Wed, 18 Feb 2026 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/home/2026-02-18-4gamer-coverage/</guid>
+      <guid>http://localhost:44705/home/2026-02-18-4gamer-coverage/</guid>
       <description></description>
     </item>
     <item>
       <title>Everything I Know, and Everything I&#39;m Ever Gonna Know Release Date Confirmed!</title>
-      <link>https://tableauxtheory.com/home/2026-01-27-sd-release-announcement/</link>
+      <link>http://localhost:44705/home/2026-01-27-sd-release-announcement/</link>
       <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://tableauxtheory.com/home/2026-01-27-sd-release-announcement/</guid>
+      <guid>http://localhost:44705/home/2026-01-27-sd-release-announcement/</guid>
       <description></description>
     </item>
   </channel>
