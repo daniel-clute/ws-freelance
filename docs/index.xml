@@ -6,7 +6,7 @@
     <description>Recent content on Daniel Clute Software &amp; Design</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://tableauxtheory.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Oh man, a Train.</title>
@@ -21,6 +21,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://tableauxtheory.com/mvns/sd/</guid>
       <description>&lt;p&gt;A small modern visual novel about the hardships of young adulthood, failed relationships, and baseball(?!?) in the modern world.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Making Plans and Understanding People</title>
+      <link>https://tableauxtheory.com/blog/00019-making_plans_and_understanding_people/</link>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://tableauxtheory.com/blog/00019-making_plans_and_understanding_people/</guid>
+      <description>&lt;p&gt;I suppose this blog is becoming more of a check-in/life update rather than my initial intended purpose to discuss major topics. The idea was to consider the concepts that I&amp;rsquo;m learning, whether about programming, business, etc. and discuss my findings. In a way, this is still what I&amp;rsquo;m doing I suppose, it just, for better or for worse, feels as though my own grasp is coming to its conclusions as I write rather than before.&#xA;This being at the edge and pushing forward past what you know is how I hope my authors to write even their MVNs, so perhaps this is very on brand?&#xA;Regardless, that&amp;rsquo;s beside the point for this week. Instead, let&amp;rsquo;s begin by framing with a condensed version of Rudyard Kipling&amp;rsquo;s poem, &lt;em&gt;If&lt;/em&gt;:&#xA;If you can keep your head when all about you&#xA;Are losing theirs and blaming it on you,&#xA;If you can trust yourself when all men doubt you,&#xA;But make allowance for their doubting too; &amp;hellip;&#xA;If you can fill the unforgiving minute&#xA;With sixty seconds&amp;rsquo; worth of distance run,&#xA;Yours is the Earth and everything that&amp;rsquo;s in it,&#xA;And—which is more—you&amp;rsquo;ll be a Man, my son!&lt;/p&gt;</description>
     </item>
     <item>
       <title>Concentrated Excellence</title>

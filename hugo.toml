@@ -1,6 +1,7 @@
 baseURL = 'https://tableauxtheory.com/'
 languageCode = 'en-us'
 title = 'Daniel Clute Software & Design'
+publishDir = 'docs'
 disableKinds = ['taxonomy', 'term']
 ignoreFiles = ['^open-source/', '^me\\.md$', '^write/']
 
